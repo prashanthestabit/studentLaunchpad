@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 use App\Rules\UserApproved;
+use App\Rules\TeacherApproved;
 
 class AssignedTeacherRequest extends FormRequest
 {
@@ -28,7 +29,7 @@ class AssignedTeacherRequest extends FormRequest
     {
         return [
             "user_id" => ['required', new UserApproved($this->user_id)],
-            "teacher_id" => ['required', new UserApproved($this->teacher_id)],
+            "teacher_id" => ['required', new TeacherApproved($this->user_id)],
         ];
     }
 

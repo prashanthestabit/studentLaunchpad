@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'teacher_url' => env('TEACHER_HOST', 'http://127.0.0.1:8002/api'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -161,7 +163,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        
+
 
         /*
          * Package Service Providers...

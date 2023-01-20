@@ -37,6 +37,8 @@ Route::middleware(['jwt.auth'])->group(function() {
         return Auth::user();
     });
 
+    Route::get("user/{id}", [StudentController::class, 'getUserById']);
+
     Route::get('/experiences', function() {
         return Experience::all(['id','name']);
     });

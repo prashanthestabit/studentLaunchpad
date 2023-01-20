@@ -3,9 +3,10 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use App\Models\User;
+use Illuminate\Support\Facades\Http;
+use Log;
 
-class UserApproved implements Rule
+class TeacherApproved implements Rule
 {
     /**
      * Create a new rule instance.
@@ -26,11 +27,14 @@ class UserApproved implements Rule
      */
     public function passes($attribute, $value)
     {
-        $user = User::find($value);
-        if($user && $user->status_id == 2) {
+        $url = config('app.teacher_url').'/user/'.$value;
+        $response = Http::get($url);
+        Log::info($response['user']['status_id']);
+        if($response && $response['user']['status_id'] == 2){
             return true;
+        }else{
+            return false;
         }
-        return false;
     }
 
     /**
@@ -40,6 +44,6 @@ class UserApproved implements Rule
      */
     public function message()
     {
-        return __('messages.admin.permission');
+        return 'The validation error message.';
     }
 }

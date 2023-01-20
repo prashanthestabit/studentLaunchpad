@@ -94,11 +94,6 @@ class StudentController extends Controller
                     'created_at' => now(),
                 ]);
 
-            //notification for the teacher, when there is a new student assigned to him
-            $teacher = User::find($request->input('teacher_id'));
-            $student = User::find($request->input('user_id'));
-
-            $teacher->notify(new NewStudentAssignedNotification($student));
 
             if ($rs) {
                 return response()->json([
@@ -107,6 +102,23 @@ class StudentController extends Controller
             } else {
                 return response()->json(['error' => __('messages.error')], 500);
             }
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return response()->json(['error' => __('messages.error')], 500);
+        }
+    }
+
+    /**
+     * Get User Data By Id
+     */
+    public function getUserById($id)
+    {
+        try {
+            $user = User::whereId($id)->first();
+                return response()->json([
+                    'user' => $user,
+                ], 200);
+
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return response()->json(['error' => __('messages.error')], 500);
