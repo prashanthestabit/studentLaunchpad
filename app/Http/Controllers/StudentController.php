@@ -146,14 +146,14 @@ class StudentController extends Controller
         try{
             if (auth('api')->user()->role_id != 1) {
                     return response()->json([
-                        'status' => true,
+                        'status' => flase,
                         'message' => 'Not Admin'
                     ], 200);
                 } else {
                     return response()->json([
-                        'status' => false,
+                        'status' => true,
                         'message' => 'IS Admin'
-                    ], 500);
+                    ], 200);
                 }
         }catch (\Exception $e) {
             Log::error($e->getMessage());

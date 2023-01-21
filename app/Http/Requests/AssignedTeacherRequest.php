@@ -29,7 +29,7 @@ class AssignedTeacherRequest extends FormRequest
     {
         return [
             "user_id" => ['required', new UserApproved($this->user_id)],
-            "teacher_id" => ['required', new TeacherApproved($this->user_id)],
+            "teacher_id" => ['required', new TeacherApproved($this->teacher_id)],
         ];
     }
 
